@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* dark mode follows the data-theme attribute set on <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------- Theme tokens (palette: lavender, pink, mint, ink) ---------- */
+:root {
+  --outer: #f7f8fa;
+  --main: #f1f3f6;
+  --card: #ffffff;
+  --ink: #0b1220;
+  --on-ink: #ffffff;
+  --text: #0b1220;
+  --text2: #5b6679;
+  --dot-empty: #e5e8ee;
+  --line: #e4e7ec;
+  --lav: #8b93f9;
+  --lavd: #4338ca;
+  --lav-soft: #eef0fe;
+  --pink: #f4a3a8;
+  --pink-soft: #fdeded;
+  --mint: #6fd3b3;
+  --mint-soft: #e6f7f1;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --outer: #090c12;
+  --main: #161d2a;
+  --card: #0f141d;
+  --ink: #05080e;
+  --text: #e8ecf3;
+  --text2: #95a1b5;
+  --dot-empty: #232c3b;
+  --line: #232c3b;
+  --lavd: #6d73f5;
+  --lav-soft: #1d2250;
+  --pink-soft: #3a2226;
+  --mint-soft: #14332b;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-outer: var(--outer);
+  --color-main: var(--main);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-on-ink: var(--on-ink);
+  --color-fg: var(--text);
+  --color-fg2: var(--text2);
+  --color-dot: var(--dot-empty);
+  --color-line: var(--line);
+  --color-lav: var(--lav);
+  --color-lavd: var(--lavd);
+  --color-lav-soft: var(--lav-soft);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --animate-rise: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-pop: pop 0.35s ease both;
+  --animate-grow: grow 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
+  --animate-draw: draw 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+  --animate-fade: fade 0.35s ease both;
+}
+
+@keyframes rise {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes draw {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-outer font-sans text-sm text-fg antialiased;
+    line-height: 1.5;
+    font-feature-settings: "cv11", "ss01";
+    letter-spacing: -0.003em;
+  }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--lavd); outline-offset: 2px; }
+  section[id], main[id], footer[id], header[id] { scroll-margin-top: 96px; }
+}
+
+@layer utilities {
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

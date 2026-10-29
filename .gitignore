@@ -1,0 +1,12 @@
+venv/
+.env
+__pycache__/
+.ipynb_checkpoints/
+dataset/
+*.pdf
+*.pkl
+.DS_Store
+
+# dashboard (React + Vite)
+dashboard/node_modules/
+dashboard/dist/
